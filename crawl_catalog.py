@@ -7,9 +7,7 @@ from pathlib import Path
 from spotipy.oauth2 import SpotifyClientCredentials
 from shared import append_track
 
-spotify_client_id = os.environ['SPOTIFY_CLIENT_ID']
-spotify_client_secret = os.environ['SPOTIFY_CLIENT_SECRET']
-spotify_credentials = SpotifyClientCredentials(client_id=spotify_client_id, client_secret=spotify_client_secret)
+spotify_credentials = SpotifyClientCredentials()
 spotify_client = spotipy.Spotify(auth_manager=spotify_credentials)
 
 def ensure_file_exists(filename):
