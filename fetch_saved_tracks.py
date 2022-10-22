@@ -1,5 +1,4 @@
 # TODO Why do I need to supply a username before asking the user to authenticate?!
-# TODO Looks like we can only get "saved" songs, which are not sctrictly "liked" songs; at least make terminology consistent
 
 import csv
 import spotipy
