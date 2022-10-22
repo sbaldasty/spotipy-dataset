@@ -191,7 +191,7 @@ else:
     search.artist_ids.add('0TnOYISbd1XYRBk9myaseg')
 
 try:
-    for i in range(30):
+    for i in range(9000):
         track_id = search.get_next_track()
         track = spotify_client.track(track_id)
         print('[ARTIST] ', track['artists'][0]['name'], ' [ALBUM] ', track['album']['name'], ' [TRACK] ', track['name'])
