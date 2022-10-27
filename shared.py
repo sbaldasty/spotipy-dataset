@@ -85,7 +85,7 @@ def append_audio_analysis(spotify_client, row):
 
 def append_track(spotify_client, csv_writer, track_id):
     track = spotify_client.track(track_id)
-    print('[ARTIST] ', track['artists'][0]['name'], ' [ALBUM] ', track['album']['name'], ' [TRACK] ', track['name'])
+    #print('[ARTIST] ', track['artists'][0]['name'], ' [ALBUM] ', track['album']['name'], ' [TRACK] ', track['name'])
 
     row = []
     row.append(track_id) # Column 1

@@ -10,6 +10,9 @@ from shared import append_track
 spotify_credentials = SpotifyClientCredentials()
 spotify_client = spotipy.Spotify(auth_manager=spotify_credentials)
 
+trackCounter = 0
+errorCounter = 0
+
 def ensure_file_exists(filename):
     Path(filename).touch(exist_ok=True)
 
@@ -96,7 +99,7 @@ class SpotifySearch:
         self.track_ids.save()
 
 output_file = 'output.csv'
-csv_file = open(output_file, 'a+')
+csv_file = open(output_file, 'a+', newline='', encoding='utf-8')
 csv_writer = csv.writer(csv_file)
 search = SpotifySearch(spotify_client)
 
@@ -107,15 +110,23 @@ else:
     print('No saved progress, starting fresh with any old artist')
     search.artist_ids.add('0TnOYISbd1XYRBk9myaseg')
 
-try:
-    for i in range(2):
+for i in range(20):
+    try:
         track_id = search.get_next_track()
         append_track(spotify_client, csv_writer, track_id)
+        trackCounter += 1
+        errorCounter = 0
+        if (trackCounter % 10 == 0):
+            print("Track count: " + str(trackCounter))
 
-except:
-    # Guess this doesn't happen automatically if there's a finally block?!
-    traceback.print_exc()
+    except:
+        traceback.print_exc()
+        errorCounter += 1
+        if errorCounter > 5:
+            errorCounter = 0
+            choice = input("5 Consecutive errors have occured. If you want to continue please enter 'y'.")
+            if choice != 'y':
+                break
 
-finally:
-    csv_file.close()
-    search.save()
+csv_file.close()
+search.save()
