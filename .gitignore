@@ -1,3 +1,14 @@
+# Custom for this project
+.cache-*
+albums_frontier
+albums_searched
+artists_frontier
+artists_searched
+tracks_frontier
+tracks_searched
+output.csv
+saved_tracks_*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
