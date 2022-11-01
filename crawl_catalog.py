@@ -112,6 +112,12 @@ try:
         track_id = search.get_next_track()
         append_track(spotify_client, csv_writer, track_id)
 
+except KeyboardInterrupt:
+    print("Manual Exit")
+    csv_file.close()
+    search.save()
+    print("Location saved")
+
 except:
     # Guess this doesn't happen automatically if there's a finally block?!
     traceback.print_exc()
