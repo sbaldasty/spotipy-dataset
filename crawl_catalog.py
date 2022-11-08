@@ -119,6 +119,12 @@ for i in range(20):
         if (trackCounter % 10 == 0):
             print("Track count: " + str(trackCounter))
 
+    except KeyboardInterrupt:
+        print("Manual Exit")
+        #csv_file.close()
+        #search.save()
+        break
+
     except:
         traceback.print_exc()
         errorCounter += 1
@@ -130,3 +136,4 @@ for i in range(20):
 
 csv_file.close()
 search.save()
+print("Location saved")
