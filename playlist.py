@@ -1,3 +1,6 @@
+from shared import get_client_id
+from shared import get_client_secret
+
 import spotipy
 import spotipy.util as util
 
@@ -54,8 +57,8 @@ for cluster in clusters:
 
 username = '12100797839' # Hardcoded to me, for now
 token = util.prompt_for_user_token(username,
-  client_id='###',
-  client_secret='###',
+  client_id=get_client_id(),
+  client_secret=get_client_secret(),
   redirect_uri='http://localhost:8888/spotifycallback', scope='playlist-modify-private')
 
 spotify_client = spotipy.Spotify(auth=token)

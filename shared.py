@@ -1,6 +1,12 @@
-import spotipy
+import os
 
 from math import sqrt
+
+def get_client_id():
+    return os.environ['SPOTIPY_CLIENT_ID']
+
+def get_client_secret():
+    return os.environ['SPOTIPY_CLIENT_SECRET']
 
 def count_distinct_values(list, property):
     values = set()
