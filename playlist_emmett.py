@@ -49,7 +49,7 @@ X_transformed = pca.fit_transform(X_scaled)
 x = X_transformed[:,0]
 y = X_transformed[:,1]
 
-model = DBSCAN(eps=.55, min_samples=5)
+model = DBSCAN(eps=0.55, min_samples=5)
 prediction = model.fit_predict(X_transformed)#xDB)
 clusters = unique(prediction)
 
