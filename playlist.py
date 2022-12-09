@@ -29,6 +29,14 @@ import os
 path = '48k_pitbull_and_23k_gratefuldead_8k_avicii_joint.csv'
 data = pd.read_csv(path, header=None)
 
+def dataframe_to_id_set(df):
+  result = set()
+  for index, row in df.iterrows():
+      result.add(row[0])
+  return result
+
+s = dataframe_to_id_set(data)
+
 cols = data.shape[1]
 X = data.iloc[:,2:cols]
 X = np.array(X.values)
@@ -48,9 +56,9 @@ clusters = unique(prediction)
 
 cluster_list = []
 for cluster in clusters:
-  ids = []
+  ids = set()
   for index in where(prediction == cluster)[0]:
-    ids.append(data.iloc[index][0])
+    ids.add(data.iloc[index][0])
   cluster_list.append(ids)
 
 #track_ids = cluster_list[2]
@@ -59,7 +67,8 @@ username = '12100797839' # Hardcoded to me, for now
 token = util.prompt_for_user_token(username,
   client_id=get_client_id(),
   client_secret=get_client_secret(),
-  redirect_uri='http://localhost:8888/spotifycallback', scope='playlist-modify-private')
+  redirect_uri='http://localhost:8888/spotifycallback',
+  scope='playlist-modify-private')
 
 spotify_client = spotipy.Spotify(auth=token)
 
@@ -68,3 +77,24 @@ spotify_client.playlist_add_items(my_playlist['id'], cluster_list[1])
 
 my_playlist = spotify_client.user_playlist_create(user=username, name='CS254 Playlist 2', public=False)
 spotify_client.playlist_add_items(my_playlist['id'], cluster_list[2])
+
+def dataframe_to_id_set(df):
+  result = set()
+  for index, row in df.iterrows():
+      result.add(row[0])
+  return result
+
+
+def remove_user_songs(cluster_list, liked_track_ids):
+  output = []
+  for cluster in cluster_list:
+    diff = cluster.difference(liked_track_ids)
+    if len(diff) < len(cluster) and len(diff) > 0:
+      output.append(diff)
+  return output
+
+def sample_clusters(cluster_list, samples_per_cluster):
+  output = []
+  for cluster in cluster_list:
+    output.
+  return output
