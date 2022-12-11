@@ -1,12 +1,21 @@
+import math
 import os
-
-from math import sqrt
+import spotipy
 
 def get_client_id():
     return os.environ['SPOTIPY_CLIENT_ID']
 
 def get_client_secret():
     return os.environ['SPOTIPY_CLIENT_SECRET']
+
+def create_spotify_user_client(username, scope):
+    token = spotipy.util.prompt_for_user_token(username,
+        client_id=get_client_id(),
+        client_secret=get_client_secret(),
+        redirect_uri='http://localhost:8888/spotifycallback',
+        scope=scope)
+
+    return spotipy.Spotify(auth=token)
 
 def count_distinct_values(list, property):
     values = set()
@@ -27,7 +36,7 @@ def standard_deviation(list, property):
     avg = mean(list, property)
     for element in list:
         sum += (element[property] - avg) ** 2
-    return 0 if count == 0 else sqrt(sum / count)
+    return 0 if count == 0 else math.sqrt(sum / count)
 
 def append_audio_features(spotify_client, row):
     audio_feature = spotify_client.audio_features([row[0]])[0]
@@ -91,7 +100,6 @@ def append_audio_analysis(spotify_client, row):
 
 def append_track(spotify_client, csv_writer, track_id):
     track = spotify_client.track(track_id)
-    #print('[ARTIST] ', track['artists'][0]['name'], ' [ALBUM] ', track['album']['name'], ' [TRACK] ', track['name'])
 
     row = []
     row.append(track_id) # Column 1

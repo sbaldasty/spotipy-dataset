@@ -1,16 +1,10 @@
-# TODO Why do I need to supply a username before asking the user to authenticate?!
-
 import csv
-import spotipy
-import spotipy.util as util
-from spotipy.oauth2 import SpotifyClientCredentials
 
 from shared import append_track
+from shared import create_spotify_user_client
 
-username = 'doublelock' # Hardcoded to me, for now
-token = util.prompt_for_user_token(username, redirect_uri='http://localhost:8888/spotifycallback', scope='user-library-read')
-spotify_client = spotipy.Spotify(auth=token)
-
+username = 'lbzeppelin' # Hardcoded to me, for now
+spotify_client = create_spotify_user_client(username, 'user-library-read')
 output_file = 'saved_tracks_' + username + ".csv"
 csv_file = open(output_file, 'a+', encoding='utf-8', newline="")
 csv_writer = csv.writer(csv_file)
