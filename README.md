@@ -1,4 +1,4 @@
-**<span style="color:red">Advisory: These scripts are not ready or recommended for public use at the moment!</span>**
+**<span style="color:red">Advisory: These scripts are intendted to produce data for a machine learning class project. They are not refined enough for us to recommend them for public consumption. If you use them, please use them with caution!</span>**
 
 # Setup
 Install Spotipy package
@@ -6,6 +6,11 @@ Install Spotipy package
 pip install spotipy
 ```
 Needs a Spotify App to authenticate to API, here's a [tutorial on how to create one](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/). The redirect URL in the script is currently hard-coded to http://localhost:8888/spotifycallback, and the redirect URL of your app needs to match.
+
+You will need to set the following environment variables to use the scripts:
+- `SPOTIPY_CLIENT_ID`: See tutorial
+- `SPOTIPY_CLIENT_SECRET`: See tutorial
+- `SPOTIFY_USERNAME`: Spotify user for creating playlists
 
 # crawl_catalog.py
 Gathers a dataset of spotify tracks from the collection at large into a file *output.csv*.
@@ -61,4 +66,7 @@ The columns are
 48. std dev tatum confidence
 
 # fetch_saved_tracks.py
-Gathers a dataset of spotify tracks from a user's saved songs into a file *saved_tracks_**[userid]**.csv*.
+Gathers a dataset of spotify tracks from a user's saved tracks into a file *saved_tracks_**[userid]**.csv* with the same columns as *output.csv*.
+
+# playlist.py
+Creates a Spotify playlist from the library based on a user's saved tracks.
