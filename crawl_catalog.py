@@ -6,6 +6,7 @@ import traceback
 from pathlib import Path
 from spotipy.oauth2 import SpotifyClientCredentials
 from shared import append_track
+from shared import csv_header_row
 
 spotify_credentials = SpotifyClientCredentials()
 spotify_client = spotipy.Spotify(auth_manager=spotify_credentials)
@@ -108,9 +109,10 @@ if os.path.getsize(output_file) > 0:
     search.load()
 else:
     print('No saved progress, starting fresh with any old artist')
+    csv_writer.writerow(csv_header_row)
     search.artist_ids.add('0TnOYISbd1XYRBk9myaseg')
 
-for i in range(20):
+while True:
     try:
         track_id = search.get_next_track()
         append_track(spotify_client, csv_writer, track_id)
@@ -121,8 +123,6 @@ for i in range(20):
 
     except KeyboardInterrupt:
         print("Manual Exit")
-        #csv_file.close()
-        #search.save()
         break
 
     except:

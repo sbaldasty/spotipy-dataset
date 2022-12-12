@@ -2,14 +2,68 @@ import math
 import os
 import spotipy
 
+csv_header_row = [
+    'Track ID',
+    'Explicit',
+    'Acousticness',
+    'danceability',
+    'duration_ms',
+    'energy',
+    'instrumentalness',
+    'key',
+    'liveness',
+    'loudness',
+    'mode',
+    'speechiness',
+    'tempo',
+    'time_signature',
+    'valence',
+    'bar count',
+    'mean bar duration',
+    'std dev bar duration',
+    'mean bar confidence',
+    'std dev bar confidence',
+    'beat count',
+    'mean beat duration',
+    'std dev beat duration',
+    'mean bar confidence',
+    'std dev bar confidence',
+    'section count',
+    'mean section duration',
+    'std dev section duration',
+    'mean section confidence',
+    'std dev section confidence',
+    'mean section loudness',
+    'std dev section loudness',
+    'mean section tempo',
+    'std dev section tempo',
+    'section key count',
+    'mean section key confidence',
+    'std dev section key confidence',
+    'section mode count',
+    'mean section mode confidence',
+    'std dev section mode confidence',
+    'section time signature count',
+    'mean section time signature confidence',
+    'std dev time signature confidence',
+    'tatum count',
+    'mean tatum duration',
+    'std dev tatum duration',
+    'mean tatum confidence',
+    'std dev tatum confidence']
+
 def get_client_id():
     return os.environ['SPOTIPY_CLIENT_ID']
 
 def get_client_secret():
     return os.environ['SPOTIPY_CLIENT_SECRET']
 
-def create_spotify_user_client(username, scope):
-    token = spotipy.util.prompt_for_user_token(username,
+def get_username():
+    return os.environ['SPOTIFY_USERNAME']
+
+def create_spotify_user_client(scope):
+    token = spotipy.util.prompt_for_user_token(
+        username=get_username(),
         client_id=get_client_id(),
         client_secret=get_client_secret(),
         redirect_uri='http://localhost:8888/spotifycallback',

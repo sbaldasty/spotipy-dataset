@@ -2,12 +2,14 @@ import csv
 
 from shared import append_track
 from shared import create_spotify_user_client
+from shared import csv_header_row
+from shared import get_username
 
-username = 'lbzeppelin' # Hardcoded to me, for now
-spotify_client = create_spotify_user_client(username, 'user-library-read')
-output_file = 'saved_tracks_' + username + ".csv"
-csv_file = open(output_file, 'a+', encoding='utf-8', newline="")
+spotify_client = create_spotify_user_client('user-library-read')
+output_file = 'saved_tracks_' + get_username() + ".csv"
+csv_file = open(output_file, 'a+', encoding='utf-8', newline='')
 csv_writer = csv.writer(csv_file)
+csv_writer.writerow(csv_header_row)
 
 offset = 0
 trackCounter = 0
@@ -27,11 +29,11 @@ while True:
             offset += 1
             trackCounter += 1
             if trackCounter % 10 == 0:
-                print("Track Count: " + str(trackCounter))
+                print('Track Count: ' + str(trackCounter))
 
         except KeyboardInterrupt:
             break
 
         except:
-            print("ERROR: No audio features")
+            print('ERROR: No audio features')
             offset += 1
