@@ -13,7 +13,7 @@ from sklearn.preprocessing import StandardScaler
 def create_track_list(clusters, min_cluster_size, max_cluster_size):
     output = []
     for cluster in clusters:
-        if len(cluster) <= min_cluster_size and len(cluster) <= max_cluster_size:
+        if len(cluster) >= min_cluster_size and len(cluster) <= max_cluster_size:
             output += cluster
 
     return output
@@ -59,19 +59,19 @@ def create_recommendation_playlist(playlist_name, library_path, saved_songs_path
         client.playlist_add_items(playlist['id'], track_ids[:100])
 
 create_recommendation_playlist(
-    playlist_name='Playlisteners - Emmett',
+    playlist_name='Playlisteners - Luke',
     library_path='output.csv',
-    saved_songs_path='saved_tracks_doublelock.csv',
-    dbscan_eps=0.55,
+    saved_songs_path='saved_tracks_lbzeppelin.csv',
+    dbscan_eps=0.95,
     min_cluster_size=3,
     max_cluster_size=50,
     num_clusters=20)
 
 create_recommendation_playlist(
-    playlist_name='Playlisteners - Luke',
+    playlist_name='Playlisteners - Emmett',
     library_path='output.csv',
-    saved_songs_path='saved_tracks_lbzeppelin.csv',
-    dbscan_eps=0.95,
+    saved_songs_path='saved_tracks_doublelock.csv',
+    dbscan_eps=0.55,
     min_cluster_size=3,
     max_cluster_size=50,
     num_clusters=20)
