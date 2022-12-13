@@ -56,11 +56,11 @@ def create_recommendation_playlist(playlist_name, library_path, saved_songs_path
     playlist = client.user_playlist_create(user=get_username(), name=playlist_name, public=False)
 
     if len(track_ids) > 0:
-        client.playlist_add_items(playlist['id'], track_ids[:num_clusters])
+        client.playlist_add_items(playlist['id'], track_ids[:100])
 
 create_recommendation_playlist(
     playlist_name='Playlisteners - Emmett',
-    library_path='48k_pitbull_and_23k_gratefuldead_8k_avicii_joint.csv',
+    library_path='output.csv',
     saved_songs_path='saved_tracks_doublelock.csv',
     dbscan_eps=0.55,
     min_cluster_size=3,
@@ -69,7 +69,7 @@ create_recommendation_playlist(
 
 create_recommendation_playlist(
     playlist_name='Playlisteners - Luke',
-    library_path='48k_pitbull_and_23k_gratefuldead_8k_avicii_joint.csv',
+    library_path='output.csv',
     saved_songs_path='saved_tracks_lbzeppelin.csv',
     dbscan_eps=0.95,
     min_cluster_size=3,
@@ -78,7 +78,7 @@ create_recommendation_playlist(
 
 create_recommendation_playlist(
     playlist_name='Playlisteners - Steven',
-    library_path='48k_pitbull_and_23k_gratefuldead_8k_avicii_joint.csv',
+    library_path='output.csv',
     saved_songs_path='saved_tracks_12100797839.csv',
     dbscan_eps=0.95,
     min_cluster_size=3,
